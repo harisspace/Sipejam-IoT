@@ -1,0 +1,332 @@
+<%- include('../partials/header') %> 
+
+<div class="main">
+  <%- include('../partials/navbar') %> 
+  
+  <div class="right-side">
+    <%- include('../partials/head') %> 
+    <div class="wrapper-right-side">
+      
+      <h1 style="font-weight: 500; color: #6B7280; margin-top: 20px; margin-bottom: 20px;">Dashboard</h1>
+
+      <!-- automatic switch -->
+      <div class="automatic-switch">
+        <p>Automatic/Manual</p>
+        <label for="automatic-switch">
+          <span></span>
+        </label>
+        <input type="checkbox" id="automatic-switch">
+      </div>
+      
+
+      <!-- status -->
+
+      <div class="status">
+        <div class="card" style="border-left: 7px solid #2563EB;">
+          <div class="card-child flex justify-between">
+            <div class="flex-col">
+              <span>Kecepatan</span>
+              <span id="kecepatan"><%= locals.kecepatan %> km/s</span>
+            </div>
+            <div style="align-self: center;">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+          </div>
+        </div>
+
+         <!-- status card -->
+         <div class="card" style="border-left: 7px solid #5cb85c;">
+          <div class="card-child flex justify-between">
+            <div class="flex-col">
+              <span>Total Kendaraan Berat</span>
+              <span><%= banyak_kb_1_la %> buah</span>
+              </div>
+              <div style="align-self: center;">
+                <i class="fas fa-truck-moving"></i>
+              </div>
+            </div>
+          </div>
+       
+
+        <!-- status card -->
+        <div class="card" style="border-left: 7px solid #d9534f;">
+          <div class="card-child flex justify-between">
+            <div class="flex-col">
+              <span>Lampu 1</span>   
+              <span id="data-card1"><%= lamp_1 %></span>
+              <form class="form_1">
+                
+              </form>
+            </div>
+            <div style="align-self: center;">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- status card -->
+        <div class="card" style="border-left: 7px solid #f0ad4e;">
+          <div class="card-child flex justify-between">
+            <div class="flex-col">
+              <span>Lampu 2</span>
+              <span id="data-card2"><%= lamp_2 %></span>
+              <form class="form_2">
+                
+              </form>
+            </div>
+            <div style="align-self: center;">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- new div -->
+        <!-- status card -->
+        <div class="card" style="border-left: 7px solid #d9534f;">
+          <div class="card-child flex justify-between">
+            <div class="flex-col">
+              <span>Status Kendaraan Berat 1</span>
+              <span id="kendaraan-berat-1"><%= status_kb_1 %></span>
+            </div>
+            <div style="align-self: center;">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- status card -->
+        <div class="card" style="border-left: 7px solid #f0ad4e;">
+          <div class="card-child flex justify-between">
+            <div class="flex-col">
+              <span>Status Kendaraan Berat 2</span>
+              <span id="kendaraan-berat-2"><%= status_kb_2 %></span>
+            </div>
+            <div style="align-self: center;">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+          </div>
+        </div>
+      
+        </div>
+
+        <button type="submit" class="kirim none">Kirim</button>
+
+        <div class="chart-side">
+            <!-- chart -->
+          <div style="height: 270px; width: 500px; display: inline-block; background-color: white; margin-bottom: 30px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);">
+            <canvas id="myChart1" style="padding: 10px 10px"></canvas>
+          </div>
+
+            <!-- chart -->
+          <div style="height: 270px; width: 500px; display: inline-block; background-color: white; margin-bottom: 30px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);">
+            <canvas id="myChart2" style="padding: 10px 10px"></canvas>
+          </div>
+        </div>
+
+        <!-- footer -->
+        <footer>
+          <span>Copyright &copy; TakajaTim 2021</span>
+        </footer>
+
+      </div>
+      
+      <script>
+        const $ = (element) => {
+          return document.querySelector(element)
+        }
+        const checkbox = $('#automatic-switch')
+        const checkSpan = $('.automatic-switch span')
+        const checkLabel = $('.automatic-switch label')
+        const btn = $('.kirim')
+        const form1 = $('.form_1')
+        const form2 = $('.form_2');
+        const dataCard1 = $('#data-card1')
+        const dataCard2 = $('#data-card2')
+        const kecepatan = $('#kecepatan')
+        const kendaraanBerat1 = $('#kendaraan-berat-1')
+        const kendaraanBerat2 = $('#kendaraan-berat-2')
+
+        // onclick btn form
+        btn.addEventListener('click', async(e) => {
+          e.preventDefault();
+          const data1 = document.querySelector('input[name="lamp_1"]:checked').value;
+          const data2 = document.querySelector('input[name="lamp_2"]:checked').value;
+          
+          // send data
+          try {
+            const response = await fetch('/status', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({data1, data2})
+            })
+            if (response) {
+              window.alert('Berhasil mengirim data ke alat')
+            }
+          }catch(err) {
+            console.log(err)
+            window.alert(err.message)
+          }
+
+          console.log(data1, data2)
+        })
+
+
+        checkbox.addEventListener('change', (e) => {
+          form1.insertAdjacentHTML('afterbegin', `
+          <ul>
+            <li>
+              <input type="radio" name="lamp_1" id="orange_1" value="orange">
+              <label for="orange_1">Orange</label>
+            </li>
+            <li>
+              <input type="radio" name="lamp_1" id="merah_1" value="merah">
+              <label for="merah_1">Merah</label>
+            </li>
+          </ul>
+          `)
+          form2.insertAdjacentHTML('afterbegin', `
+          <ul>
+            <li>
+              <input type="radio" name="lamp_2" id="orange_2" value="orange">
+              <label for="orange_2">Orange</label>
+            </li>
+            <li>
+              <input type="radio" name="lamp_2" id="merah_2" value="merah">
+              <label for="merah_2">Merah</label>
+            </li>
+          </ul>
+          `)
+
+          const isChecked = checkbox.checked;
+          if (isChecked) {
+            checkSpan.classList.add('left')
+            checkLabel.style.backgroundColor = 'white'
+            btn.classList.remove('none')
+            dataCard1.classList.add('none')
+            dataCard2.classList.add('none')
+          }else {
+            form1.innerHTML = ''
+            form2.innerHTML = ''
+            btn.classList.add('none')
+            checkSpan.classList.remove('left')
+            dataCard1.classList.remove('none')
+            dataCard2.classList.remove('none')
+            checkLabel.style.backgroundColor = '#2563EB'
+          }
+        }) 
+
+        
+        const socket = io('http://localhost:4000')
+
+        let resData1;
+        let resData2;
+
+        resData1 = <%- JSON.stringify(banyak_kb_1) %>;
+        resData2 = <%- JSON.stringify(banyak_kb_2) %>;
+
+
+        let dataRealtime1 = null;
+        let dataRealtime2 = null;
+        socket.on("message", (data) => {
+          const content = data.content
+          dataRealtime1 = content.b_kb_1
+          dataRealtime2 = content.b_kb_2
+          kendaraanBerat1.textContent = content.s_kb_1 ? "Ada": "Tidak Ada"
+          kendaraanBerat2.textContent = content.s_kb_2 ? "Ada": "Tidak Ada"
+          kecepatan.textContent = content.kecepatan + ' km/s';
+          let lamp_1;
+          let lamp_2;
+          const status1 = content.s_kb_1
+          const status2 = content.s_kb_2
+          if (status1 == 1 && status2 == 0) {
+            lamp_1 = 'Orange'
+            lamp_2 = 'Merah'
+          }else if (status1 == 0 && status2 == 1) {
+            lamp_1 = 'Merah'
+            lamp_2 = 'Orange'
+          }else if (status1 == 0 && status2 == 0) {
+            lamp_1 = 'Orange'
+            lamp_2 = 'Orange'
+          }else if (status1 == 1 && status2 == 1) {
+            lamp_1 = 'Orange'
+            lamp_2 = 'Merah'
+          }else {
+            lamp_1 = 'Merah'
+            lamp_2 = 'Merah'
+          }
+          dataCard1.textContent = lamp_1;
+          dataCard2.textContent = lamp_2
+          console.log(data)
+        })
+
+        const labels1 = resData1;
+        const labels2 = resData2;
+        const data1 = {
+          labels: labels1,
+          datasets: [{
+            label: 'Jumlah Kendaraan Berat 1',
+            backgroundColor: '#FFFFFF',
+            borderColor: '#2563EB',
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: resData1.reverse(),
+          }]
+        };
+        const data2 = {
+          labels: labels2,
+          datasets: [{
+            label: 'Jumlah Kendaraan Berat 2',
+            backgroundColor: '#FFFFFF',
+            borderColor: '#2563EB',
+            fillColor: "#79D1CF",
+            strokeColor: "#79D1CF",
+            data: resData2.reverse(),
+          }]
+        };
+
+        const config1 = {
+          type: 'line',
+          data: data1,
+          options: {}
+        };
+        const config2 = {
+          type: 'line',
+          data: data2,
+          options: {}
+        };
+        
+
+      var myChart1 = new Chart(
+          $('#myChart1'),
+          config1
+        );
+      var myChart2 = new Chart(
+          $('#myChart2'),
+          config2
+        );
+
+        setInterval(function() {
+          if (dataRealtime1) {
+            console.log(dataRealtime2)
+            data1.datasets[0].data.push(dataRealtime1)
+            data2.datasets[0].data.push(dataRealtime2)
+            dataRealtime1 = null;
+            dataRealtime2 = null;
+          }
+          myChart1.update()
+          myChart2.update()
+        }, 500)
+
+        
+      </script>
+
+    </div>
+  </div>
+</div>
+
+
+<%- include('../partials/footer') %> 
