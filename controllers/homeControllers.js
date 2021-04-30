@@ -2,13 +2,13 @@ const axios = require("axios");
 
 module.exports.home_get = async (req, res, next) => {
   // get all data link
-  console.log(process.env.ACCESS_KEY);
+  console.log(process.env.KEY);
   try {
     const response = await axios.get(
       `${process.env.BASE_URL}${process.env.PARAMS}${process.env.APLICATION}${process.env.DEVICE_1}?fu=1&ty=4&drt=1`,
       {
         headers: {
-          "X-M2M-Origin": process.env.ACCESS_KEY,
+          "X-M2M-Origin": process.env.KEY,
           "Content-Type": "application/json;ty=4",
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "*",
@@ -21,7 +21,7 @@ module.exports.home_get = async (req, res, next) => {
     const allResponseTruck1 = resArray.map(async (url) => {
       const response = await axios.get(`${process.env.BASE_URL}${url}`, {
         headers: {
-          "X-M2M-Origin": process.env.ACCESS_KEY,
+          "X-M2M-Origin": process.env.KEY,
           "Content-Type": "application/json;ty=4",
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "*",
@@ -130,7 +130,7 @@ module.exports.status_post = async (req, res, next) => {
       },
       {
         headers: {
-          "X-M2M-Origin": process.env.ACCESS_KEY,
+          "X-M2M-Origin": process.env.KEY,
           "Content-Type": "application/json;ty=4",
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "*",
