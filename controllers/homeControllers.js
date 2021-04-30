@@ -39,6 +39,7 @@ module.exports.home_get = async (req, res, next) => {
       let status_kb_2 = [];
       let status_kc_1 = [];
       let status_kc_2 = [];
+      let total_kb_arr = [];
 
       response.forEach((data, index) => {
         if (index === 0) {
@@ -50,6 +51,7 @@ module.exports.home_get = async (req, res, next) => {
         status_kb_2.push(data.s_kb_2);
         status_kc_1.push(data.s_kc_1);
         status_kc_2.push(data.s_kc_2);
+        total_kb_arr.push(data.b_kb_1 + data.b_kb_2);
       });
       // console.log(latestData);
       res.locals.kecepatan = Math.floor(Math.random() * 60);
@@ -75,11 +77,18 @@ module.exports.home_get = async (req, res, next) => {
         lamp_2 = "Merah";
       }
 
+      // total kendaraan besar
+      const total_kb = total_kb_arr.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      );
+      console.log(total_kb, total_kb_arr);
       return res.render("dashboard/index", {
         banyak_kb_1,
         banyak_kb_2,
         banyak_kb_1_la: latestData.b_kb_1,
         banyak_kb_2_la: latestData.b_kb_2,
+        total_kb,
         status_kb_1: latestData.s_kb_1 ? "Ada" : "Tidak ada",
         status_kb_2: latestData.s_kb_2 ? "Ada" : "Tidak ada",
         lamp_1,

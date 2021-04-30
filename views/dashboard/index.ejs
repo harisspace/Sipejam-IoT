@@ -39,7 +39,7 @@
           <div class="card-child flex justify-between">
             <div class="flex-col">
               <span>Total Kendaraan Berat</span>
-              <span><%= banyak_kb_1_la %> buah</span>
+              <span><%= total_kb %> buah</span>
               </div>
               <div style="align-self: center;">
                 <i class="fas fa-truck-moving"></i>
@@ -48,65 +48,66 @@
           </div>
        
 
-        <!-- status card -->
-        <div class="card" style="border-left: 7px solid #d9534f;">
-          <div class="card-child flex justify-between">
-            <div class="flex-col">
-              <span>Lampu 1</span>   
-              <span id="data-card1"><%= lamp_1 %></span>
-              <form class="form_1">
-                
-              </form>
-            </div>
-            <div style="align-self: center;">
-              <i class="fas fa-lightbulb"></i>
-            </div>
-          </div>
-        </div>
-        
-        <!-- status card -->
-        <div class="card" style="border-left: 7px solid #f0ad4e;">
-          <div class="card-child flex justify-between">
-            <div class="flex-col">
-              <span>Lampu 2</span>
-              <span id="data-card2"><%= lamp_2 %></span>
-              <form class="form_2">
-                
-              </form>
-            </div>
-            <div style="align-self: center;">
-              <i class="fas fa-lightbulb"></i>
+          
+          <!-- new div -->
+          <!-- status card -->
+          <div class="card" style="border-left: 7px solid #d9534f;">
+            <div class="card-child flex justify-between">
+              <div class="flex-col">
+                <span>Status Kendaraan Berat 1</span>
+                <span id="kendaraan-berat-1"><%= status_kb_1 %></span>
+              </div>
+              <div style="align-self: center;">
+                <i class="fas fa-lightbulb"></i>
+              </div>
             </div>
           </div>
-        </div>
+          
+          <!-- status card -->
+          <div class="card" style="border-left: 7px solid #f0ad4e;">
+            <div class="card-child flex justify-between">
+              <div class="flex-col">
+                <span>Status Kendaraan Berat 2</span>
+                <span id="kendaraan-berat-2"><%= status_kb_2 %></span>
+              </div>
+              <div style="align-self: center;">
+                <i class="fas fa-lightbulb"></i>
+              </div>
+            </div>
+          </div>
+          
+          <!-- status card -->
+          <div class="card" style="border-left: 7px solid #d9534f;">
+            <div class="card-child flex justify-between">
+              <div class="flex-col">
+                <span>Lampu 1</span>   
+                <span id="data-card1"><%= lamp_1 %></span>
+                <form class="form_1">
+                  
+                </form>
+              </div>
+              <div style="align-self: center;">
+                <i class="fas fa-lightbulb"></i>
+              </div>
+            </div>
+          </div>
+          
+          <!-- status card -->
+          <div class="card" style="border-left: 7px solid #f0ad4e;">
+            <div class="card-child flex justify-between">
+              <div class="flex-col">
+                <span>Lampu 2</span>
+                <span id="data-card2"><%= lamp_2 %></span>
+                <form class="form_2">
+                  
+                </form>
+              </div>
+              <div style="align-self: center;">
+                <i class="fas fa-lightbulb"></i>
+              </div>
+            </div>
+          </div>
 
-        <!-- new div -->
-        <!-- status card -->
-        <div class="card" style="border-left: 7px solid #d9534f;">
-          <div class="card-child flex justify-between">
-            <div class="flex-col">
-              <span>Status Kendaraan Berat 1</span>
-              <span id="kendaraan-berat-1"><%= status_kb_1 %></span>
-            </div>
-            <div style="align-self: center;">
-              <i class="fas fa-lightbulb"></i>
-            </div>
-          </div>
-        </div>
-        
-        <!-- status card -->
-        <div class="card" style="border-left: 7px solid #f0ad4e;">
-          <div class="card-child flex justify-between">
-            <div class="flex-col">
-              <span>Status Kendaraan Berat 2</span>
-              <span id="kendaraan-berat-2"><%= status_kb_2 %></span>
-            </div>
-            <div style="align-self: center;">
-              <i class="fas fa-lightbulb"></i>
-            </div>
-          </div>
-        </div>
-      
         </div>
 
         <button type="submit" class="kirim none">Kirim</button>
