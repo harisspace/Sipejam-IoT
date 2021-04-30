@@ -28,6 +28,12 @@ io.on("connection", (socket) => {
   console.log("made connection");
 });
 
+app.use(
+  app.use((req, res) => {
+    res.status(404).render("errors/404");
+  })
+);
+
 server.listen(process.env.PORT || 4000, () =>
   console.log("running on port 4000")
 );
