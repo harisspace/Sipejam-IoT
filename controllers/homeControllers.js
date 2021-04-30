@@ -2,6 +2,7 @@ const axios = require("axios");
 
 module.exports.home_get = async (req, res, next) => {
   // get all data link
+  console.log(process.env.ACCESS_KEY);
   try {
     const response = await axios.get(
       `${process.env.BASE_URL}${process.env.PARAMS}${process.env.APLICATION}${process.env.DEVICE_1}?fu=1&ty=4&drt=1`,
