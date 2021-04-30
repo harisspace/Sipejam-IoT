@@ -121,7 +121,7 @@ module.exports.status_post = async (req, res, next) => {
   // orange = 0, merah = 1
 
   try {
-    axios.post(
+    const response = await axios.post(
       `${process.env.BASE_URL}${process.env.PARAMS}${process.env.Status}`,
       {
         "m2m:cin": {
@@ -137,6 +137,7 @@ module.exports.status_post = async (req, res, next) => {
         },
       }
     );
+    console.log(response);
   } catch (err) {
     console.log(err);
     return next(err);
