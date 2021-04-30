@@ -1,7 +1,6 @@
 <%- include('../partials/header') %> 
 
 <div class="main">
-  <%- include('../partials/navbar') %> 
   
   <div class="right-side">
     <%- include('../partials/head') %> 
@@ -266,14 +265,9 @@
           labels: labels1,
           datasets: [{
             label: 'Jumlah Kendaraan Berat 1',
-            backgroundColor: '#FFFFFF',
+            backgroundColor: '#2563EB',
             borderColor: '#2563EB',
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
+            tension: 0.3,
             data: resData1.reverse(),
           }]
         };
@@ -281,10 +275,10 @@
           labels: labels2,
           datasets: [{
             label: 'Jumlah Kendaraan Berat 2',
-            backgroundColor: '#FFFFFF',
-            borderColor: '#2563EB',
+            backgroundColor: 'rgb(75, 192, 192)',
+            borderColor: 'rgb(75, 192, 192)',
             fillColor: "#79D1CF",
-            strokeColor: "#79D1CF",
+            tension: 0.3,
             data: resData2.reverse(),
           }]
         };
@@ -292,7 +286,16 @@
         const config1 = {
           type: 'line',
           data: data1,
-          options: {}
+          options: {
+            scales: {
+              xAxes: [],
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
         };
         const config2 = {
           type: 'line',
