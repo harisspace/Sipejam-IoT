@@ -38,7 +38,7 @@
           <div class="card-child flex justify-between">
             <div class="flex-col">
               <span>Total Kendaraan Berat</span>
-              <span><%= total_kb %> buah</span>
+              <span id="total_kb"><%= total_kb %> buah</span>
               </div>
               <div style="align-self: center;">
                 <i class="fas fa-truck-moving"></i>
@@ -145,6 +145,7 @@
         const kecepatan = $('#kecepatan')
         const kendaraanBerat1 = $('#kendaraan-berat-1')
         const kendaraanBerat2 = $('#kendaraan-berat-2')
+        const totalKendaraanBerat = $('#total_kb');
 
         // onclick btn form
         btn.addEventListener('click', async(e) => {
@@ -234,6 +235,7 @@
           kendaraanBerat1.textContent = content.s_kb_1 ? "Ada": "Tidak Ada"
           kendaraanBerat2.textContent = content.s_kb_2 ? "Ada": "Tidak Ada"
           kecepatan.textContent = content.kecepatan + ' km/s';
+          console.log(totalKendaraanBerat.textContent)
           let lamp_1;
           let lamp_2;
           const status1 = content.s_kb_1
