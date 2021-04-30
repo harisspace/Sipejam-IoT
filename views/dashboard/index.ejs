@@ -235,7 +235,12 @@
           kendaraanBerat1.textContent = content.s_kb_1 ? "Ada": "Tidak Ada"
           kendaraanBerat2.textContent = content.s_kb_2 ? "Ada": "Tidak Ada"
           kecepatan.textContent = content.kecepatan + ' km/s';
-          console.log(totalKendaraanBerat.textContent)
+          console.log(totalKendaraanBerat.textContent.split(' '))
+          const totalLatestKB = totalKendaraanBerat.textContent.split(' ')[0]
+          const prevKB = content.b_kb_1 + content.b_kb_2;
+          console.log(prevKB)
+          const totalKBNow = parseInt(totalLatestKB) + prevKB;
+          totalKendaraanBerat.textContent = totalKBNow;
           let lamp_1;
           let lamp_2;
           const status1 = content.s_kb_1
