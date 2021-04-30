@@ -125,7 +125,7 @@ module.exports.status_post = async (req, res, next) => {
       `${process.env.BASE_URL}${process.env.PARAMS}${process.env.APLICATION}${process.env.DEVICE_2}`,
       {
         "m2m:cin": {
-          con: `{"cam_a":1,"cam_b":1,"lamp_a":${data.data1},"lamp_b":${data.data2},"}`,
+          con: `{"cam_a":1,"cam_b":1,"lamp_a":${data.data1},"lamp_b":${data.data2}}`,
         },
       },
       {
