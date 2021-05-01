@@ -3,6 +3,7 @@ const path = require("path");
 const homeRoutes = require("./routes/index");
 const socket = require("socket.io");
 const http = require("http");
+const favicon = require("serve-favicon");
 require("dotenv").config();
 
 const app = express();
@@ -12,6 +13,7 @@ const server = http.createServer(app);
 const io = socket(server);
 // midleware
 app.use(express.static(path.join(__dirname, "public")));
+app.use(favicon(path.join(__dirname, "public", "assets", "favicon.ico")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
